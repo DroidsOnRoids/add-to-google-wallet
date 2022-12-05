@@ -1,17 +1,25 @@
+import 'package:add_to_google_wallet/add_to_google_wallet_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'add_to_google_wallet_platform_interface.dart';
-
-/// An implementation of [AddToGoogleWalletPlatform] that uses method channels.
 class MethodChannelAddToGoogleWallet extends AddToGoogleWalletPlatform {
-  /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('add_to_google_wallet');
+  final methodChannel = const MethodChannel('com.droidsonroids/loyalty_pass');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<void> saveLoyaltyPass(String pass) async {
+    methodChannel.setMethodCallHandler((call) async {
+      if (call.method == 'onError') {
+        final message = call.arguments['message'];
+        debugPrint("Error when trying to save Google Pay loyalty pass: $message");
+      }
+    });
+
+    final Map<String, dynamic> sendMap = {'loyalty_pass': pass};
+
+    await methodChannel.invokeMethod(
+      'saveLoyaltyPass',
+      Map.from(sendMap),
+    );
   }
 }

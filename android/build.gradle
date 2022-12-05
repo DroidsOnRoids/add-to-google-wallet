@@ -44,3 +44,7 @@ android {
         minSdkVersion 16
     }
 }
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-pay:16.0.3'
+}
