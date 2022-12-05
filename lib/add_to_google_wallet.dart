@@ -1,8 +1,5 @@
-
-import 'add_to_google_wallet_platform_interface.dart';
+import 'package:add_to_google_wallet/add_to_google_wallet_platform_interface.dart';
 
 class AddToGoogleWallet {
-  Future<String?> getPlatformVersion() {
-    return AddToGoogleWalletPlatform.instance.getPlatformVersion();
-  }
+  Future<void> saveLoyaltyPass(String pass) => AddToGoogleWalletPlatform.instance.saveLoyaltyPass(pass);
 }
