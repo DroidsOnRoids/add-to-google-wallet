@@ -1,4 +1,5 @@
 import 'package:add_to_google_wallet/add_to_google_wallet_method_channel.dart';
+import 'package:flutter/material.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class AddToGoogleWalletPlatform extends PlatformInterface {
@@ -15,5 +16,11 @@ abstract class AddToGoogleWalletPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<void> saveLoyaltyPass(String pass) => throw UnimplementedError('saveLoyaltyPass() has not been implemented.');
+  Future<void> saveLoyaltyPass({
+    required String pass,
+    Function(Object)? onError,
+    VoidCallback? onSuccess,
+    VoidCallback? onCanceled,
+  }) =>
+      throw UnimplementedError('saveLoyaltyPass() has not been implemented.');
 }
