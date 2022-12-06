@@ -7,11 +7,28 @@ class MethodChannelAddToGoogleWallet extends AddToGoogleWalletPlatform {
   final methodChannel = const MethodChannel('com.droidsonroids/loyalty_pass');
 
   @override
-  Future<void> saveLoyaltyPass(String pass) async {
+  Future<void> saveLoyaltyPass({
+    required String pass,
+    Function(Object)? onError,
+    VoidCallback? onSuccess,
+    VoidCallback? onCanceled,
+  }) async {
     methodChannel.setMethodCallHandler((call) async {
       if (call.method == 'onError') {
         final message = call.arguments['message'];
-        debugPrint("Error when trying to save Google Pay loyalty pass: $message");
+        debugPrint("Error when trying to save Google Wallet loyalty pass: $message");
+
+        if (onError != null) {
+          onError(message);
+        }
+      }
+
+      if (call.method == 'onSuccess' && onSuccess != null) {
+        onSuccess();
+      }
+
+      if (call.method == 'onCanceled' && onCanceled != null) {
+        onCanceled();
       }
     });
 

@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 
 class AddToGoogleWalletButton extends StatelessWidget {
   final String pass;
+  final Function(Object)? onError;
+  final VoidCallback? onSuccess;
+  final VoidCallback? onCanceled;
 
   const AddToGoogleWalletButton({
     super.key,
+    this.onError,
+    this.onSuccess,
+    this.onCanceled,
     required this.pass,
   });
 
@@ -16,5 +22,10 @@ class AddToGoogleWalletButton extends StatelessWidget {
         child: const Text('Add to google wallet'),
       );
 
-  void _onAddToGoogleWalletTap() => AddToGoogleWallet().saveLoyaltyPass(pass);
+  void _onAddToGoogleWalletTap() => AddToGoogleWallet().saveLoyaltyPass(
+        pass: pass,
+        onError: onError,
+        onSuccess: onSuccess,
+        onCanceled: onCanceled,
+      );
 }
