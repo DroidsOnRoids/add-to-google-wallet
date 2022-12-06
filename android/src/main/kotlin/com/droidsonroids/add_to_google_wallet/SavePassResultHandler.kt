@@ -8,7 +8,7 @@ import io.flutter.plugin.common.PluginRegistry.ActivityResultListener
 
 internal class SavePassResultHandler(private val channel: MethodChannel) : ActivityResultListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
-        return if (requestCode == addToGoogleWallet) {
+        return if (requestCode == ADD_TO_WALLET_REQUEST_CODE) {
             handlePassResult(resultCode, data)
             true
         } else {
