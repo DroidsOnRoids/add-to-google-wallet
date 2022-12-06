@@ -7,11 +7,11 @@ import io.flutter.plugin.common.MethodChannel
 
 class AddToGoogleWalletPlugin : FlutterPlugin, ActivityAware {
     private lateinit var methodChannel: MethodChannel
-    private lateinit var manager: SavePassResultHandler
+    private lateinit var resultHandler: SavePassResultHandler
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         methodChannel = MethodChannel(binding.binaryMessenger, CHANNEL)
-        manager = SavePassResultHandler(methodChannel)
+        resultHandler = SavePassResultHandler(methodChannel)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -21,7 +21,7 @@ class AddToGoogleWalletPlugin : FlutterPlugin, ActivityAware {
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         val handler = MethodCallHandler(binding.activity)
         methodChannel.setMethodCallHandler(handler)
-        binding.addActivityResultListener(manager)
+        binding.addActivityResultListener(resultHandler)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
