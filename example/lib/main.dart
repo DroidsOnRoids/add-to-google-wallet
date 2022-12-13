@@ -1,4 +1,3 @@
-import 'package:add_to_google_wallet/button_language.dart';
 import 'package:add_to_google_wallet/widgets/add_to_google_wallet_button.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +25,8 @@ class MyApp extends StatelessWidget {
                     onError: (Object error) => _onError(context, error),
                     onSuccess: () => _onSuccess(context),
                     onCanceled: () => _onCanceled(context),
+                    // Unsupported locale. Button will display English version.
+                    locale: const Locale('ab'),
                   ),
                   const SizedBox(height: 8.0),
                   AddToGoogleWalletButton(
@@ -33,7 +34,14 @@ class MyApp extends StatelessWidget {
                     onError: (Object error) => _onError(context, error),
                     onSuccess: () => _onSuccess(context),
                     onCanceled: () => _onCanceled(context),
-                    language: ButtonLanguage.pl,
+                    locale: const Locale.fromSubtags(languageCode: 'fr', countryCode: 'FR'),
+                  ),
+                  const SizedBox(height: 8.0),
+                  AddToGoogleWalletButton(
+                    pass: _examplePass,
+                    onError: (Object error) => _onError(context, error),
+                    onSuccess: () => _onSuccess(context),
+                    onCanceled: () => _onCanceled(context),
                   ),
                 ],
               ),
