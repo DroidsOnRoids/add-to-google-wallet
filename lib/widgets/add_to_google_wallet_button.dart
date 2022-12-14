@@ -8,7 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 const double _buttonRadius = 24.5;
 const String _defaultLanguageCode = 'en';
 const String _defaultCountryCode = 'US';
-const String _buttonPathPrefix = 'packages/add_to_google_wallet/assets/svg/buttons/';
+const String _packagePrefix = 'packages/add_to_google_wallet/';
+const String _buttonPathPrefix = 'assets/svg/buttons/';
 const String _buttonPathSuffix = '_add_to_google_wallet_wallet-button.svg';
 
 class AddToGoogleWalletButton extends StatelessWidget {
@@ -22,7 +23,7 @@ class AddToGoogleWalletButton extends StatelessWidget {
   /// In case this field is null, current locale of the device will be used.
   /// In case [locale] is not supported, [Locale('en', 'US')] will be set as default.
   ///
-  /// Supported language codes: [ar, az, bg, br, bs, by, ca, cz, de, dk, en_AU, en_CA, en_GB, en_IN, en_SG, en_US, en_ZA, es419, es_ES, es_US, et, fl, fp, fr_CA, fr_FR, gr, he, hr, hu, hy, id, is, it, jp, ka, kk, ky, lt, lv, mk, my, nl, no, pl, pt, ro, ru, se, sk, sl, sq, sr, th, tr, uk, uz, vi, zh_HK, zh_TW]
+  /// Supported locales: [ar, az, bg, br, bs, by, ca, cz, de, dk, en_AU, en_CA, en_GB, en_IN, en_SG, en_US, en_ZA, es419, es_ES, es_US, et, fl, fp, fr_CA, fr_FR, gr, he, hr, hu, hy, id, is, it, jp, ka, kk, ky, lt, lv, mk, my, nl, no, pl, pt, ro, ru, se, sk, sl, sq, sr, th, tr, uk, uz, vi, zh_HK, zh_TW]
   final Locale? locale;
 
   /// Called when an error was thrown while adding a pass to the Google Wallet
@@ -50,7 +51,10 @@ class AddToGoogleWalletButton extends StatelessWidget {
             future: _getButtonAssetPath(context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return SvgPicture.asset(snapshot.data!);
+                return SvgPicture.asset(
+                  snapshot.data!,
+                  package: 'add_to_google_wallet',
+                );
               }
 
               return const SizedBox.shrink();
@@ -76,28 +80,54 @@ class AddToGoogleWalletButton extends StatelessWidget {
       );
 
   Future<String> _getButtonAssetPath(BuildContext context) async {
-    final String languageCode = locale?.languageCode ?? ui.window.locale.languageCode;
-    final String? countryCode = locale?.countryCode ?? ui.window.locale.countryCode;
+    final String languageCode = locale?.languageCode.substring(0, 2).toLowerCase() ?? ui.window.locale.languageCode;
+    final String? countryCode = locale?.countryCode?.toUpperCase() ?? ui.window.locale.countryCode;
 
-    final String? languageCodePath = await _validateAndReturnPath(languageCode);
-
-    if (languageCodePath != null) {
-      return languageCodePath;
-    } else if (countryCode != null) {
-      final String? fullCodePath = await _validateAndReturnPath(languageCode + countryCode.toUpperCase());
+    if (countryCode != null) {
+      final String? fullCodePath = await _validateAndReturnPath(languageCode + countryCode);
 
       if (fullCodePath != null) {
         return fullCodePath;
       }
     }
 
-    return _getPath(_defaultLanguageCode + _defaultCountryCode);
+    final String? languageCodePath = await _validateAndReturnPath(languageCode);
+
+    if (languageCodePath != null) {
+      return languageCodePath;
+    }
+
+    switch (languageCode) {
+      case 'en':
+        const code = 'enUS';
+        final path = await _validateAndReturnPath(code);
+        if (path == null) continue defaultPath;
+        return _getPath(code);
+      case 'fr':
+        const code = 'frFR';
+        final path = await _validateAndReturnPath(code);
+        if (path == null) continue defaultPath;
+        return _getPath(code);
+      case 'es':
+        const code = 'esES';
+        final path = await _validateAndReturnPath(code);
+        if (path == null) continue defaultPath;
+        return _getPath(code);
+      case 'zh':
+        const code = 'zhHK';
+        final path = await _validateAndReturnPath(code);
+        if (path == null) continue defaultPath;
+        return _getPath(code);
+      defaultPath:
+      default:
+        return _getPath(_defaultLanguageCode + _defaultCountryCode);
+    }
   }
 
   Future<String?> _validateAndReturnPath(String code) async {
     try {
       final String path = _getPath(code);
-      await rootBundle.load(path);
+      await rootBundle.load('$_packagePrefix$path');
       return path;
     } catch (_) {
       return null;
