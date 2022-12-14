@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
         home: ScaffoldMessenger(
           key: scaffoldMessengerKey,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Plugin example app'),
-            ),
+            appBar: AppBar(title: const Text('Plugin example app')),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +32,10 @@ class MyApp extends StatelessWidget {
                     onError: (Object error) => _onError(context, error),
                     onSuccess: () => _onSuccess(context),
                     onCanceled: () => _onCanceled(context),
-                    locale: const Locale.fromSubtags(languageCode: 'fr', countryCode: 'FR'),
+                    locale: const Locale.fromSubtags(
+                      languageCode: 'fr',
+                      countryCode: 'FR',
+                    ),
                   ),
                   const SizedBox(height: 8.0),
                   AddToGoogleWalletButton(
