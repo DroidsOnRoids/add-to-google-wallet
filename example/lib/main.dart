@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
                     onSuccess: () => _onSuccess(context),
                     onCanceled: () => _onCanceled(context),
                     // Unsupported locale. Button will display English version.
-                    locale: const Locale('ab'),
+                    locale: const Locale('und'),
                   ),
                   const SizedBox(height: 8.0),
                   AddToGoogleWalletButton(
