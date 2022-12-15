@@ -57,7 +57,10 @@ class AddToGoogleWalletButton extends StatelessWidget {
                 );
               }
 
-              return const SizedBox.shrink();
+              return SvgPicture.asset(
+                _getPath(_defaultLanguageCode + _defaultCountryCode),
+                package: 'add_to_google_wallet',
+              );
             },
           ),
           Positioned.fill(
@@ -80,7 +83,7 @@ class AddToGoogleWalletButton extends StatelessWidget {
       );
 
   Future<String> _getButtonAssetPath(BuildContext context) async {
-    final String languageCode = locale?.languageCode.substring(0, 2).toLowerCase() ?? ui.window.locale.languageCode;
+    final String languageCode = locale?.languageCode.toLowerCase() ?? ui.window.locale.languageCode;
     final String? countryCode = locale?.countryCode?.toUpperCase() ?? ui.window.locale.countryCode;
 
     if (countryCode != null) {
