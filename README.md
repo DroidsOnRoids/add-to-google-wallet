@@ -14,30 +14,48 @@ Before plugin can be used, make sure to complete all of the [prerequisites](http
 4. [Create a Passes Object](https://developers.google.com/wallet/generic/android#1_create_a_passes_object)
 
 ## Usage
+### Installation
 To use this plugin, add `add_to_google_wallet` as a [dependency in your pubspec.yaml file](https://docs.flutter.dev/development/packages-and-plugins/using-packages).
 
+```yml
+dependencies:
+  add_to_google_wallet: ^0.0.1
+```
+
+or run this command:
+```zsh
+flutter pub add add_to_google_wallet 
+```
+
+### Example usage
 ```dart
 import 'package:add_to_google_wallet/widgets/add_to_google_wallet_button.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: AddToGoogleWalletButton(
-              pass: _examplePass,
-              onSuccess: () {},
-              onCanceled: () {},
-              onError: (Object error) {},
-              locale: const Locale.fromSubtags(
-                languageCode: 'fr',
-                countryCode: 'FR',
-              ),
+void main() => runApp(const MaterialApp(home: MyApp()));
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: AddToGoogleWalletButton(
+            pass: _examplePass,
+            onSuccess: () => _showSnackBar(context, 'Success!'),
+            onCanceled: () => _showSnackBar(context, 'Action canceled.'),
+            onError: (Object error) => _showSnackBar(context, error.toString()),
+            locale: const Locale.fromSubtags(
+              languageCode: 'fr',
+              countryCode: 'FR',
             ),
           ),
         ),
-      ),
-    );
+      );
+
+  void _showSnackBar(BuildContext context, String text) =>
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+}
 
 const String _examplePass = """ 
 {
@@ -71,4 +89,4 @@ const String _examplePass = """
 """;
 ```
 
-See the example app for more examples.
+See the [example app](https://github.com/DroidsOnRoids/add-to-google-wallet/blob/main/example/lib/main.dart) for more examples.
