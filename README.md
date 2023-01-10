@@ -125,4 +125,4 @@ final String _examplePass = """
 See the [example app](https://github.com/DroidsOnRoids/add-to-google-wallet/blob/main/example/lib/main.dart) for more examples.
 
 ### Demo
-<img src="demo/demo.gif" width="60%"/>
+<img src="demo/demo.gif" width="40%"/>
