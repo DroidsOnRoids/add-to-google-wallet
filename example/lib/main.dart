@@ -45,21 +45,25 @@ class MyApp extends StatelessWidget {
         ),
       );
 
-  void _onError(BuildContext context, Object error) => ScaffoldMessenger.of(context).showSnackBar(
+  void _onError(BuildContext context, Object error) =>
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.red,
           content: Text(error.toString()),
         ),
       );
 
-  void _onSuccess(BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
+  void _onSuccess(BuildContext context) =>
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.green,
-          content: Text('Pass has been successfully added to the Google Wallet.'),
+          content:
+              Text('Pass has been successfully added to the Google Wallet.'),
         ),
       );
 
-  void _onCanceled(BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
+  void _onCanceled(BuildContext context) =>
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.yellow,
           content: Text('Adding a pass has been canceled.'),
