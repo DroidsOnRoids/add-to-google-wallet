@@ -123,3 +123,6 @@ final String _examplePass = """
 ```
 
 See the [example app](https://github.com/DroidsOnRoids/add-to-google-wallet/blob/main/example/lib/main.dart) for more examples.
+
+### Demo
+![demo](demo/demo.gif)
