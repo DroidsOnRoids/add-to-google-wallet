@@ -16,7 +16,6 @@ class MethodChannelAddToGoogleWallet extends AddToGoogleWalletPlatform {
     methodChannel.setMethodCallHandler((call) async {
       if (call.method == 'onError') {
         final message = call.arguments['message'];
-        debugPrint("Error when trying to save Google Wallet loyalty pass: $message");
 
         if (onError != null) {
           onError(message);
