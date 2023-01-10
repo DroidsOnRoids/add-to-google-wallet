@@ -1,3 +1,6 @@
+## 0.0.3
+- Fix demo.gif link
+
 ## 0.0.2
 - Make the repository public
 - Format files to match Dart formatter
