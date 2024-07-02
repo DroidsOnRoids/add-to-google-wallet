@@ -38,4 +38,10 @@ class MethodChannelAddToGoogleWallet extends AddToGoogleWalletPlatform {
       Map.from(sendMap),
     );
   }
+
+  @override
+  Future<bool> get isGoogleWalletApiAvailable async {
+    final bool result = await methodChannel.invokeMethod<bool>('isGoogleWalletApiAvailable') ?? false;
+    return result;
+  }
 }

@@ -23,4 +23,7 @@ abstract class AddToGoogleWalletPlatform extends PlatformInterface {
     VoidCallback? onCanceled,
   }) =>
       throw UnimplementedError('saveLoyaltyPass() has not been implemented.');
+
+  Future<bool> get isGoogleWalletApiAvailable =>
+      throw UnimplementedError('isGoogleWalletApiAvailable has not been implemented.');
 }

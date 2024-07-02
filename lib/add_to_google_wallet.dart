@@ -14,4 +14,6 @@ class AddToGoogleWallet {
         onSuccess: onSuccess,
         onCanceled: onCanceled,
       );
+
+  Future<bool> get isGoogleWalletApiAvailable => AddToGoogleWalletPlatform.instance.isGoogleWalletApiAvailable;
 }

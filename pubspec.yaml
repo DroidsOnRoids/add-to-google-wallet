@@ -5,19 +5,19 @@ issue_tracker: https://github.com/DroidsOnRoids/add-to-google-wallet/issues
 version: 0.0.3
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: '>=2.18.4 <4.0.0'
   flutter: ">=2.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^1.1.6
-  plugin_platform_interface: ^2.0.2
+  flutter_svg: ^2.0.10+1
+  plugin_platform_interface: ^2.1.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
