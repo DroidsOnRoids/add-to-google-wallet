@@ -19,7 +19,7 @@ To use this plugin, add `add_to_google_wallet` as a [dependency in your pubspec.
 
 ```yml
 dependencies:
-  add_to_google_wallet: ^0.0.3
+  add_to_google_wallet: ^0.0.4
 ```
 
 or run this command:

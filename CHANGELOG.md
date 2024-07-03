@@ -1,3 +1,7 @@
+## 0.0.4
+- Add ```isGoogleWalletApiAvailable```
+- Bump dependencies
+
 ## 0.0.3
 - Fix demo.gif link
 
