@@ -2,7 +2,7 @@ name: add_to_google_wallet
 description: A Flutter plugin that provides the Add To Google Wallet Button.
 repository: https://github.com/DroidsOnRoids/add-to-google-wallet
 issue_tracker: https://github.com/DroidsOnRoids/add-to-google-wallet/issues
-version: 0.0.4
+version: 0.0.4+1
 
 environment:
   sdk: '>=2.18.4 <4.0.0'

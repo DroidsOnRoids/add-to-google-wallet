@@ -1,3 +1,6 @@
+## 0.0.4+1
+- Fix code formatting
+
 ## 0.0.4
 - Add ```isGoogleWalletApiAvailable```
 - Bump dependencies
