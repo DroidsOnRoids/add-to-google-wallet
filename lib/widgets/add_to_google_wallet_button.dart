@@ -66,7 +66,8 @@ class AddToGoogleWalletButton extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: _onAddToGoogleWalletTap,
-                borderRadius: const BorderRadius.all(Radius.circular(_buttonRadius)),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(_buttonRadius)),
               ),
             ),
           ),
@@ -81,13 +82,14 @@ class AddToGoogleWalletButton extends StatelessWidget {
       );
 
   Future<String> _getButtonAssetPath(BuildContext context) async {
-    final String languageCode =
-        locale?.languageCode.toLowerCase() ?? View.of(context).platformDispatcher.locale.languageCode;
-    final String? countryCode =
-        locale?.countryCode?.toUpperCase() ?? View.of(context).platformDispatcher.locale.countryCode;
+    final String languageCode = locale?.languageCode.toLowerCase() ??
+        View.of(context).platformDispatcher.locale.languageCode;
+    final String? countryCode = locale?.countryCode?.toUpperCase() ??
+        View.of(context).platformDispatcher.locale.countryCode;
 
     if (countryCode != null) {
-      final String? fullCodePath = await _validateAndReturnPath(languageCode + countryCode);
+      final String? fullCodePath =
+          await _validateAndReturnPath(languageCode + countryCode);
 
       if (fullCodePath != null) {
         return fullCodePath;
