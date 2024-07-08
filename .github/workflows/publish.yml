@@ -7,10 +7,12 @@ on:
 
 # Publish using the reusable workflow from dart-lang.
 jobs:
-  build:
+  publish:
+    permissions:
+      id-token: write # Required for authentication using OIDC
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -19,7 +21,5 @@ jobs:
         run: flutter pub get
       - name: Analyze
         run: flutter analyze
-  publish:
-    permissions:
-      id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+      - name: Publish
+        run: dart pub publish --force
