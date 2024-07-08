@@ -1,3 +1,6 @@
+## 0.0.4+2
+- Automated package publish
+
 ## 0.0.4+1
 - Fix code formatting
 
