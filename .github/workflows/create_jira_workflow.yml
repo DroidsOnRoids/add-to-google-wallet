@@ -9,31 +9,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Create Jira Issue
         env:
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_BASE_URL: 'https://droidsonroids.atlassian.net'
+          JIRA_BASE_URL: "https://droidsonroids.atlassian.net"
         run: |
           ISSUE_SUMMARY="Brief summary of the issue"
           ISSUE_DESCRIPTION="Detailed description of the issue"
-
           curl -X POST \
-            -H "Authorization: Basic $(echo -n $JIRA_API_TOKEN | base64)" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "fields": {
-                "project": {
-                  "key": "FT"
-                },
-                "summary": "'"$ISSUE_SUMMARY"'",
-                "description": "'"$ISSUE_DESCRIPTION"'",
-                "issuetype": {
-                  "name": "Task"
-                }
+          -u "yevhenii.oros@droidsonroids.pl:JIRA_API_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "fields": {
+              "project": {
+                "key": "FT"
+              },
+              "summary": "Brief summary of the issuee",
+              "description": "Detailed description of the issue",
+              "issuetype": {
+                "name": "Task"
               }
-            }' \
-            $JIRA_BASE_URL/rest/api/2/issue/
+            }
+          }' \
+          $JIRA_BASE_URL/rest/api/2/issue/
+
 # jobs:
 #   issue-sync:
 #     permissions:
