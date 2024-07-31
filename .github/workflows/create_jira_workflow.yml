@@ -14,9 +14,7 @@ jobs:
           github-owner: DroidsOnRoids
           github-repo: add-to-google-wallet
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          jira-hostname: https://id.atlassian.com
+          jira-hostname: https://droidsonroids.atlassian.net
           jira-auth-token: ${{ secrets.JIRA_API_TOKEN }}
           jira-auth-email: ${{ secrets.JIRA_AUTH_EMAIL }}
           jira-project-key: FT
-          synced-label: Bug
-          accepted-label: Bug
