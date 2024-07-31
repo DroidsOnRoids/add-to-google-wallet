@@ -18,7 +18,7 @@ jobs:
           ISSUE_SUMMARY="Brief summary of the issue"
           ISSUE_DESCRIPTION="Detailed description of the issue"
           curl -X POST \
-          -u "yevhenii.oros@droidsonroids.pl:JIRA_API_TOKEN" \
+          -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
           -H "Content-Type: application/json" \
           -d '{
             "fields": {
@@ -33,20 +33,3 @@ jobs:
             }
           }' \
           $JIRA_BASE_URL/rest/api/2/issue/
-
-# jobs:
-#   issue-sync:
-#     permissions:
-#       issues: write # should be set
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Sync to Jira
-#         uses: atsushii/github-issue-to-jira@v1
-#         with:
-#           github-owner: DroidsOnRoids
-#           github-repo: add-to-google-wallet
-#           github-token: ${{ secrets.GITHUB_TOKEN }}
-#           jira-hostname: https://droidsonroids.atlassian.net
-#           jira-auth-token: ${{ secrets.JIRA_API_TOKEN }}
-#           jira-auth-email: ${{ secrets.JIRA_AUTH_EMAIL }}
-#           jira-project-key: FT
