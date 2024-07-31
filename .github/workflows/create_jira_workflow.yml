@@ -1,0 +1,41 @@
+name: Create Jira Task from GitHub Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-jira-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Jira Task
+        env:
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_USERNAME: yevhenii.oros@droidsonroids.pl
+          JIRA_URL: https://id.atlassian.com
+          JIRA_PROJECT_KEY: FT
+        run: |
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_BODY="${{ github.event.issue.body }}"
+
+          JIRA_PAYLOAD=$(cat <<EOF
+          {
+            "fields": {
+              "project": {
+                "key": "$JIRA_PROJECT_KEY"
+              },
+              "summary": "$ISSUE_TITLE",
+              "description": "$ISSUE_BODY",
+              "issuetype": {
+                "name": "Task"
+              }
+            }
+          }
+          EOF
+          )
+
+          curl -X POST -H "Content-Type: application/json" \
+            -u $JIRA_USERNAME:$JIRA_API_TOKEN \
+            --data "$JIRA_PAYLOAD" \
+            $JIRA_URL/rest/api/2/issue/
