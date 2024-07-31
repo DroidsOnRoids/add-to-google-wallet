@@ -18,5 +18,5 @@ jobs:
           jira-auth-token: ${{ secrets.JIRA_API_TOKEN }}
           jira-auth-email: ${{ secrets.JIRA_AUTH_EMAIL }}
           jira-project-key: FT
-          synced-label: empty
-          accepted-label: empty
+          synced-label: Bug
+          accepted-label: Bug
