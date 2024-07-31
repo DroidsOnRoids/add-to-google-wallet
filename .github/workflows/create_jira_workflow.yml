@@ -1,41 +1,20 @@
-name: Create Jira Task from GitHub Issue
-
+name: Sync issues to jira
 on:
   issues:
-    types: [opened]
-
+    types: [labeled]
 jobs:
-  create-jira-task:
+  issue-sync:
+    permissions:
+      issues: write # should be set
     runs-on: ubuntu-latest
-
     steps:
-      - name: Create Jira Task
-        env:
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_USERNAME: yevhenii.oros@droidsonroids.pl
-          JIRA_URL: https://id.atlassian.com
-          JIRA_PROJECT_KEY: FT
-        run: |
-          ISSUE_TITLE="${{ github.event.issue.title }}"
-          ISSUE_BODY="${{ github.event.issue.body }}"
-
-          JIRA_PAYLOAD=$(cat <<EOF
-          {
-            "fields": {
-              "project": {
-                "key": "$JIRA_PROJECT_KEY"
-              },
-              "summary": "$ISSUE_TITLE",
-              "description": "$ISSUE_BODY",
-              "issuetype": {
-                "name": "Task"
-              }
-            }
-          }
-          EOF
-          )
-
-          curl -X POST -H "Content-Type: application/json" \
-            -u $JIRA_USERNAME:$JIRA_API_TOKEN \
-            --data "$JIRA_PAYLOAD" \
-            $JIRA_URL/rest/api/2/issue/
+      - name: Sync to Jira
+        uses: atsushii/github-issue-to-jira@v1
+        with:
+          github-owner: DroidsOnRoids
+          github-repo: add-to-google-wallet
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-hostname: https://id.atlassian.com
+          jira-auth-token: ${{ secrets.JIRA_API_TOKEN }}
+          jira-auth-email: ${{ secrets.JIRA_AUTH_EMAIL }}
+          jira-project-key: FT
