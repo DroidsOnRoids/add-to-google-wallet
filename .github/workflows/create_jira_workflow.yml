@@ -32,7 +32,7 @@ jobs:
               "project": {
                 "key": "FT"
               },
-              "summary": "${ISSUE_TITLE}",
+              "summary": "${{ github.event.issue.title }}",
               "description": "Detailed description of the issueee",
               "issuetype": {
                 "name": "Task"
