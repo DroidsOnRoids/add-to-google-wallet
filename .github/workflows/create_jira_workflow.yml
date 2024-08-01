@@ -16,7 +16,7 @@ jobs:
           JIRA_BASE_URL: "https://droidsonroids.atlassian.net"
         run: |
           curl -X POST \
-          -u yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
+          -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
           -H "Content-Type: application/json" \
           -d '{
             "fields": {
