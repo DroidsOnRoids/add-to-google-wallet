@@ -17,12 +17,12 @@ jobs:
         run: |
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
-          ISSUE_TYPE="Task" 
-          if echo "${{ github.event.issue.labels.*.name }}" | grep -q "bug"; then
-            ISSUE_TYPE="Bug"
-          elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
-            ISSUE_TYPE="Story"
-          fi
+          # ISSUE_TYPE="Task" 
+          # if echo "${{ github.event.issue.labels.*.name }}" | grep -q "bug"; then
+          #   ISSUE_TYPE="Bug"
+          # elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
+          #   ISSUE_TYPE="Story"
+          # fi
 
 
           curl -X POST \
