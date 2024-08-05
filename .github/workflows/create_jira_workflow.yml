@@ -14,7 +14,7 @@ jobs:
         env:
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
           JIRA_BASE_URL: "https://droidsonroids.atlassian.net"
-        run: |          
+        run: |
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           ISSUE_TYPE="Task" 
@@ -32,10 +32,10 @@ jobs:
               "project": {
                 "key": "FT"
               },
-              "summary": "${{ ISSUE_TITLE }}",
-              "description": "${{ ISSUE_BODY }}",
+              "summary": \"${ISSUE_TITLE}\",
+              "description":  "${{ github.event.issue.body }}",
               "issuetype": {
-                "name":  "${{ ISSUE_TYPE }}",
+                "name": "Task"
               }
             }
           }' \
@@ -58,15 +58,14 @@ jobs:
 #           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 #           JIRA_BASE_URL: "https://droidsonroids.atlassian.net"
 #         run: |
-          # ISSUE_TITLE="${{ github.event.issue.title }}"
-          # ISSUE_BODY="${{ github.event.issue.body }}"
-          # # ISSUE_TYPE="Task" 
-          # # if echo "${{ github.event.issue.labels.*.name }}" | grep -q "bug"; then
-          # #   ISSUE_TYPE="Bug"
-          # # elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
-          # #   ISSUE_TYPE="Story"
-          # # fi
-
+# ISSUE_TITLE="${{ github.event.issue.title }}"
+# ISSUE_BODY="${{ github.event.issue.body }}"
+# # ISSUE_TYPE="Task"
+# # if echo "${{ github.event.issue.labels.*.name }}" | grep -q "bug"; then
+# #   ISSUE_TYPE="Bug"
+# # elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
+# #   ISSUE_TYPE="Story"
+# # fi
 
 #           curl -X POST \
 #           -u "${JIRA_AUTH_EMAIL}:${JIRA_API_TOKEN}" \
