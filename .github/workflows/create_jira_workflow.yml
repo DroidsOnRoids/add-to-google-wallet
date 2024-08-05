@@ -27,18 +27,19 @@ jobs:
           curl -X POST \
           -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
           -H "Content-Type: application/json" \
-          -d '{
-            "fields": {
-              "project": {
-                "key": "FT"
+          -d "{
+            \"fields\": {
+              \"project\": {
+                \"key\": \"FT\"
               },
-              "summary": "${ISSUE_TITLE}",
-              "description":  "${{ github.event.issue.body }}",
-              "issuetype": {
-                "name": "Task"
+              \"summary\": \"${ISSUE_TITLE}\",
+              \"description\":  \"${ISSUE_BODY}\",
+              \"issuetype\": {
+                \"name\": \"${ISSUE_TYPE}\"
               }
             }
-          }' \
+          }" \
+
           $JIRA_BASE_URL/rest/api/2/issue/
 
 # name: Sync issues to jira
