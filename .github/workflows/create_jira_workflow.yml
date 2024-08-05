@@ -18,7 +18,7 @@ jobs:
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           ISSUE_TYPE="Task" 
-          if echo "${{ join(github.event.issue.labels.*.name, '/n')}}" | grep -q '"bug"'; then
+          if echo "${{ join(github.event.issue.labels.*.name, '\n')}}" | grep -q '"bug"'; then
             ISSUE_TYPE="Bug"
           elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
             ISSUE_TYPE="Story"
@@ -47,46 +47,3 @@ jobs:
             }
           }' \
           $JIRA_BASE_URL/rest/api/2/issue/
-
-# name: Sync issues to jira
-# on:
-#   issues:
-#     types: [labeled]
-
-# jobs:
-#   create-task:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Create Jira Issue
-#         env:
-#           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-#           JIRA_BASE_URL: "https://droidsonroids.atlassian.net"
-#         run: |
-# ISSUE_TITLE="${{ github.event.issue.title }}"
-# ISSUE_BODY="${{ github.event.issue.body }}"
-# # ISSUE_TYPE="Task"
-# # if echo "${{ github.event.issue.labels.*.name }}" | grep -q "bug"; then
-# #   ISSUE_TYPE="Bug"
-# # elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
-# #   ISSUE_TYPE="Story"
-# # fi
-
-#           curl -X POST \
-#           -u "${JIRA_AUTH_EMAIL}:${JIRA_API_TOKEN}" \
-#           -H "Content-Type: application/json" \
-#           -d '{
-#             "fields": {
-#               "project": {
-#                 "key": "FT"
-#               },
-#               "summary": "$ISSUE_TITLE",
-#               "description": "$ISSUE_BODY",
-#               "issuetype": {
-#                 "name": "Task"
-#               }
-#             }
-#           }' \
-#           $JIRA_BASE_URL/rest/api/2/issue/
