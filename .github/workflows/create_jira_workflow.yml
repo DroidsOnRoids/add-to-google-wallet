@@ -18,7 +18,9 @@ jobs:
           ISSUE_TITLE="${{ github.event.issue.title }}"
           ISSUE_BODY="${{ github.event.issue.body }}"
           ISSUE_TYPE="Task" 
-          if echo "${{ join(github.event.issue.labels.*.name, '\n')}}" | grep -q '"bug"'; then
+          labels="${{ toJSON(github.event.issue.labels.*.name) }}"
+          echo "Labels: $labels"
+          if echo "$labels" | grep -q '"bug"'; then
             ISSUE_TYPE="Bug"
           elif echo "${{ github.event.issue.labels.*.name }}" | grep -q "feature"; then
             ISSUE_TYPE="Story"
