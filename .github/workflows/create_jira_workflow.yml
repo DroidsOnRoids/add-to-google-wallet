@@ -27,7 +27,7 @@ jobs:
           # Debug output
           echo "ISSUE_TITLE: $ISSUE_TITLE"
           echo "ISSUE_BODY: $ISSUE_BODY"
-          echo "ISSUE_TYPEs: ${{ github.event.issue.labels.*.name }}"
+          echo "ISSUE_TYPEs:${{ join(github.event.issue.labels.*.name, ', ') }}"
           echo "ISSUE_TYPE: $ISSUE_TYPE"
 
 
