@@ -39,9 +39,9 @@ jobs:
                 "key": "FT"
               },
               "summary": "'"${ISSUE_TITLE}"'",
-              "description":  "${{ github.event.issue.body }}",
+              "description":  "'"${ISSUE_BODY}"'",
               "issuetype": {
-                "name": "Task"
+                "name": "'"${ISSUE_TYPE}"'"
               }
             }
           }' \
