@@ -29,23 +29,22 @@ jobs:
           echo "ISSUE_BODY: $ISSUE_BODY"
           echo "ISSUE_TYPE: $ISSUE_TYPE"
 
+
           curl -X POST \
           -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
           -H "Content-Type: application/json" \
-          -d @- <<EOF
-          {
+          -d '{
             "fields": {
               "project": {
                 "key": "FT"
               },
-              "summary": "$ISSUE_TITLE",
-              "description": "$ISSUE_BODY",
+              "summary": "${ISSUE_TITLE}",
+              "description":  "${{ github.event.issue.body }}",
               "issuetype": {
-                "name": "$ISSUE_TYPE"
+                "name": "Task"
               }
             }
-          }
-          EOF
+          }' \
           $JIRA_BASE_URL/rest/api/2/issue/
 
 # name: Sync issues to jira
