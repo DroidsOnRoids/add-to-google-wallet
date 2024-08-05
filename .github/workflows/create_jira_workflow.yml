@@ -38,7 +38,7 @@ jobs:
               "project": {
                 "key": "FT"
               },
-              "summary": "${ISSUE_TITLE}",
+              "summary": "'"${ISSUE_TITLE}"'",
               "description":  "${{ github.event.issue.body }}",
               "issuetype": {
                 "name": "Task"
