@@ -1,7 +1,7 @@
 name: Sync issues to jira
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
 
 jobs:
   create-task:
@@ -26,6 +26,11 @@ jobs:
             ISSUE_TYPE="Story"
           fi
 
+           # Find active sprint ID
+          SPRINT_ID=$(curl -s -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            "$JIRA_BASE_URL/rest/agile/1.0/board/598/sprint?state=active" | jq -r '.values[0].id')
+
           # Debug output
           echo "ISSUE_TITLE: $ISSUE_TITLE"
           echo "ISSUE_BODY: $ISSUE_BODY"
@@ -49,3 +54,12 @@ jobs:
             }
           }' \
           $JIRA_BASE_URL/rest/api/2/issue/
+
+          # Add the issue to the active sprint
+          curl -X POST \
+          -u "yevhenii.oros@droidsonroids.pl:${JIRA_API_TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d '{"issues":["'"$ISSUE_KEY"'"]}' \
+          $JIRA_BASE_URL/rest/agile/1.0/sprint/$SPRINT_ID/issue
+
+          echo "Issue $ISSUE_KEY has been added to sprint $SPRINT_ID"
