@@ -1,3 +1,6 @@
+## 0.0.5
+- Support Gradle 8 ([#36](https://github.com/DroidsOnRoids/add-to-google-wallet/pull/36))
+
 ## 0.0.4+2
 - Automated package publish
 
